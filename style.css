@@ -11,10 +11,23 @@ body {
     padding: 0;
 }
 
-#logo {
-    filter: invert(1);
-    color: black;
+.logo1{
+    display: flex;
+    gap:5px;
+}
+#vibe {
+    font-size: 30px;              /* makes icon bigger */
+    line-height: 1;               /* removes extra vertical space */
+    background: linear-gradient(60deg, #f11784, #9b4dff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
+
+.vibe{
+    font-weight: bolder;
+    text-shadow: 0px 1px 2px #f11784, 0px -1px 2px #9b4dff;
+    font-size:larger
 }
 
 .home {
@@ -83,6 +96,26 @@ body {
     text-decoration: none;
 }
 
+.hamburger{
+    display: none;
+    font-size:25px;
+    cursor:pointer;
+    color:white
+}
+.hamburger:hover{
+    color:rgb(214, 209, 209);
+}
+.close{
+    cursor: pointer;
+}
+.close:hover{
+    color:rgb(214, 209, 209);
+}
+.nav{
+     display: flex;
+    align-items: center;
+    gap: 6px;
+}
 
 .header {
     display: flex;
@@ -132,8 +165,9 @@ body {
     margin: 30px;
     display: flex;
     gap: 10px;
+    justify-content: center;
     flex-wrap: wrap;
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 70vh;
 }
 
@@ -206,10 +240,10 @@ body {
     position: fixed;
     bottom: 10px;
     background-color: #796680;
-    width: 68.5vw;
+    min-width: 68.5vw;
     padding: 12px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 25px;
     border-radius: 20px;
 }
@@ -220,13 +254,16 @@ body {
     width: 90%;
     bottom: 0;
     border-radius: 10px;
-    margin:6px;
+    margin: 6px;
+    cursor:pointer;
 }
 
-    .circle{
+.circle {
     position: absolute;
     left: 6px;
     top: 50%;
+    background: black;
+    left: 0%;
     transform: translateY(-50%);
     width: 14px;
     height: 14px;
@@ -264,7 +301,7 @@ body {
 
 .songlist {
     max-height: 60vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .songlist ul li .info div:last-child {
@@ -288,4 +325,56 @@ body {
 
 .playnow i {
     font-size: 12px
+}
+
+.songbutton i {
+    cursor: pointer;
+    font-size: larger;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.songbutton {
+    display: flex;
+}
+
+.songinfo .songtime {
+    color: white;
+    padding: 0px 6px;
+}
+
+
+@media(max-width: 1200px ){
+    .left{
+        position: absolute;
+        left: -115%;
+        transition: all .3s;
+        z-index:1;
+        width: 330px;
+    }
+    .left .close{
+    position: absolute;
+    right:20px;
+    top:25px;
+    font-size:15px;
+
+}
+    .right{
+        width: 100vw;
+    }
+    .playbar{
+        width:89vw;
+        font-size: 12px;          
+    }
+ 
+    .hamburger{
+        display: block;
+    }
+    .cardContainer{
+        width:90vw;
+        margin: 0;
+    }
 }
