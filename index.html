@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify - Web Player: Music for everyone</title>
+    <title>Vibes - Web Player: Music for everyone</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="utility.css">
 
@@ -41,7 +41,7 @@
                                 <div>Song Name</div>
                                 <div>Song Artist</div>
                             </div>
-                            <div id="playnow">Play Now</div>
+                            <div id="playnow">PlayNow</div>
                             <i class="fa-regular fa-circle-play"></i>
                         </li>
                     </ul>
@@ -85,22 +85,82 @@
             <div class="spotifyplaylist">
                 <h1>Moodwave</h1>
                 <div class="cardContainer">
-                    <div class="card">
+                    <div data-folder="Tailwinder-wave" class="card">
                         <div class="play"><i class="fa-solid fa-play"></i></div>
-                        <img class="hh" src="happy_hits.png" alt="">
-                        <h2>Happy Hits!</h2>
-                        <p>Hits to boost your mood and fill you with happiness!</p>
-                    </div>
-                    <div class="card">
-                        <div class="play"><i class="fa-solid fa-play"></i></div>
-                        <img class="hh" src="happy_hits.png" alt="">
-                        <h2>Happy Hits!</h2>
+                        <img class="hh" src="cover.png" alt="">
+                        <h2>Talwinder waves!</h2>
                         <p>Hits to boost your mood and fill you with happiness!</p>
                     </div>
 
+                    <div data-folder="Aujla-Era" class="card">
+                        <div class="play"><i class="fa-solid fa-play"></i></div>
+                        <img class="hh" src="cover2.png" alt="">
+                        <h2>Aujla Era!</h2>
+                        <p>Blast of joy and happiness with Punjabi tadka!</p>
+                    </div>
+
+                    <div data-folder="Aditya-Rikhari" class="card">
+                        <div class="play"><i class="fa-solid fa-play"></i></div>
+                        <img class="hh" src="sahiba.png" alt="">
+                        <h2>Love and Peace</h2>
+                        <p>Hits to boost your mood and fill you with happiness!</p>
+                    </div>
+
+                    <div data-folder="king" class="card">
+                        <div class="play"><i class="fa-solid fa-play"></i></div>
+                        <img class="hh" src="raval.png" alt="">
+                        <h2>Garba Beats</h2>
+                        <p>Boost your mood and fill you with happiness!</p>
+                    </div>
+                    <div data-folder="Aditya-Rikhari" class="card">
+                        <div class="play"><i class="fa-solid fa-play"></i></div>
+                        <img class="hh" src="jubin.png" alt="">
+                        <h2>Bhakti sagar</h2>
+                        <p>Enlighten your soul with peacful spritual track</p>
+                    </div>
+
+                    <div data-folder="Tailwinder-wave" class="card">
+                        <div class="play"><i class="fa-solid fa-play"></i></div>
+                        <img class="hh" src="jk.png" alt="">
+                        <h2>K-POP</h2>
+                        <p>Enjoy korean pop music in Golden voice by Golden Makne</p>
+                    </div>
+
+                    <div data-folder="king" class="card">
+                        <div class="play"><i class="fa-solid fa-play"></i></div>
+                        <img class="hh" src="jennie.png" alt="">
+                        <h2>Ruby</h2>
+                        <p>Jennie hits with extra power Enjoy power!</p>
+                    </div>
+
+                    <div data-folder="king" class="card">
+                        <div class="play"><i class="fa-solid fa-play"></i></div>
+                        <img class="hh" src="happy_hits.png" alt="">
+                        <h2>Chill Party vibe</h2>
+                        <p>Hits to boost your mood and fill you with happiness!</p>
+                    </div>
+ 
+                    <div data-folder="Aditya-Rikhari" class="card">
+                        <div class="play"><i class="fa-solid fa-play"></i></div>
+                        <img class="hh" src="puth.png" alt="">
+                        <h2>POP-Star</h2>
+                        <p>Enlighten your soul with peacful spritual track</p>
+                    </div>
 
 
+                    <div data-folder="Aujla-Era " class="card">
+                        <div class="play"><i class="fa-solid fa-play"></i></div>
+                        <img class="hh" src="aujla.png" alt="">
+                        <h2>Aujla vibe</h2>
+                        <p>Hits to boost your mood and fill you with happiness!</p>
+                    </div>
 
+                    <div data-folder="king" class="card">
+                        <div class="play"><i class="fa-solid fa-play"></i></div>
+                        <img class="hh" src="king.png" alt="">
+                        <h2>American POP</h2>
+                        <p>Hits to boost your mood and fill you with happiness!</p>
+                    </div>
 
                 </div>
                 <div class="playbar">
@@ -114,7 +174,17 @@
                             <i id="play" class="fa-solid fa-circle-play"></i>
                             <i id="next" class="fa-solid fa-forward-step"></i>
                         </div>
-                        <div class="songtime"></div>
+                        <div class="timevol">
+                            <div class="songtime"></div>
+                            <div class="volume">
+                               <i class="fa-solid fa-volume-high"></i>
+
+                                <div class="range">
+                                    <input type="range" name="volume">
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

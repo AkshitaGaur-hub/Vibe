@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+:root{
+    --a:0;
+}
 body {
     font-family: 'Roboto', sans-serif;
     background-color: black;
@@ -121,7 +124,7 @@ body {
 .header {
     display: flex;
     justify-content: space-between;
-    background-color: rgb(34, 34, 34);
+    background-color: #3a333d;
 }
 
 .header>* {
@@ -150,7 +153,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #1fdf64;
+    background-color: #9828bb;
     border-radius: 50%;
     width: 35px;
     height: 30px;
@@ -158,8 +161,8 @@ body {
     position: absolute;
     top: 175px;
     right: 14px;
-    opacity: 1;
-    transition: all 1s ease-out;
+    opacity: var(--a);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 
 .cardContainer {
@@ -176,9 +179,14 @@ body {
     width: 200px;
     padding: 10px;
     border-radius: 7px;
+    transition: all .9s;
     background-color: #252525;
 }
-
+.card:hover{
+    cursor:pointer;
+    background-color: rgb(56, 56, 56);
+    --a:1;
+}
 .card>* {
     padding-top: 4px;
 }
@@ -202,7 +210,7 @@ body {
 }
 
 .signupbtn {
-    background-color: rgb(34, 34, 34);
+    background-color: #3a333d;
     color: rgb(117, 116, 116);
     font-weight: bolder;
     border: none;
@@ -214,12 +222,16 @@ body {
     font-size: 17px;
     color: white;
 }
+.volume-icon{
+    fill: white;
+}
 
 .loginbtn {
     align-items: center;
-    background-color: white;
+    background-color: 9828bb;
     border-radius: 20px;
-    color: black;
+    color: white;
+    font-weight: lighter;
     width: 53px;
     height: 24px;
     padding: 3px;
@@ -235,17 +247,23 @@ body {
     height: 25px;
     cursor: pointer;
 }
+.volume{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:20px;
+}
 
 .playbar {
     position: fixed;
     bottom: 10px;
-    background-color: #796680;
+    background-color: #3a333d;
     min-width: 68.5vw;
     padding: 12px;
-     justify-content: center;
+     justify-content: space-evenly;
     display: flex;
     /* justify-content: space-between; */
-    gap: 25px;
+    gap: 15px;
     border-radius: 20px;
 }
 
@@ -275,7 +293,7 @@ body {
 }
 .abovebar{
     display: flex;
-    gap: 160px;
+    gap: 180px;
 }
 .songlist ul li {
     display: flex;
@@ -313,16 +331,20 @@ body {
     color: #b3b3b3;
 
 }
-
+.songinfo{
+ width: 170px;
+}
 #playnow {
     font-size: x-small;
+    width: 50px;
 }
 
 /* small play-now label + icon inside song list */
 .playnow {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 6px;
+    /* width: 50px; */
     font-size: x-small;
     color: #d0d0d0;
 }
@@ -350,14 +372,56 @@ body {
     padding: 0px 6px;
 }
 
+.timevol {
+    display: flex;
+    align-items: center;
+    gap: 40px;              /* space between time, icon, range */
+    white-space: nowrap;   /* prevents wrapping/overlap */
+    cursor: pointer;
+}
 
-@media(max-width: 750px ){
+/* time text */
+.songtime {
+    font-size: 12px;
+    min-width: 90px;       /* keeps space fixed */
+}
+
+/* volume wrapper */
+.volume {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* volume slider */
+.volume input[type="range"] {
+    width: 90px;
+}
+
+.volume img {
+    width: 18px;
+    height: 18px;
+}
+
+.range {
+    display: flex;
+    align-items: center;
+}
+
+.range input[type="range"] {
+    width: 100px;
+    cursor: pointer;
+}
+
+
+@media(max-width: 990px ){
     .left{
         position: absolute;
         left: -115%;
         transition: all .3s;
         z-index:1;
         width: 330px;
+        padding:0;
     }
     .left .close{
     position: absolute;
@@ -380,7 +444,7 @@ body {
     .hamburger{
         display: block;
     }
-    .cardContainer{
+    .cardContainer{ 
         width:90vw;
         margin: 0;
      justify-content: center;
@@ -389,7 +453,11 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 15px;
+        gap: 2px;
+    }
+    .timevol{
+        flex-direction: column;
+        gap: 2px;
     }
 }
 @media(max-width: 1200px ){
@@ -399,6 +467,7 @@ body {
         transition: all .3s;
         z-index:1;
         width: 330px;
+        padding: 0;
     }
     .left .close{
     position: absolute;
@@ -425,6 +494,13 @@ body {
         width:90vw;
         margin: 0;
      justify-content: center;
+    }
+    .timevol{
+        flex-direction: column;
+        gap: 2px;
+    }
+    .abovebar{
+         gap: 2px;
     }
     
 }
