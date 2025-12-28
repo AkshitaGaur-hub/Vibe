@@ -107,6 +107,7 @@ body {
 }
 .close{
     cursor: pointer;
+    display: none;
 }
 .close:hover{
     color:rgb(214, 209, 209);
@@ -165,7 +166,6 @@ body {
     margin: 30px;
     display: flex;
     gap: 10px;
-    justify-content: center;
     flex-wrap: wrap;
     overflow-y: auto;
     max-height: 70vh;
@@ -242,8 +242,9 @@ body {
     background-color: #796680;
     min-width: 68.5vw;
     padding: 12px;
+     justify-content: center;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     gap: 25px;
     border-radius: 20px;
 }
@@ -272,7 +273,10 @@ body {
     /* box-shadow: 0 4px 10px rgba(29,185,84,0.25); */
     /* border: 2px solid rgba(255,255,255,0.12); */
 }
-
+.abovebar{
+    display: flex;
+    gap: 160px;
+}
 .songlist ul li {
     display: flex;
     /* flex-wrap: wrap; */
@@ -347,6 +351,47 @@ body {
 }
 
 
+@media(max-width: 750px ){
+    .left{
+        position: absolute;
+        left: -115%;
+        transition: all .3s;
+        z-index:1;
+        width: 330px;
+    }
+    .left .close{
+    position: absolute;
+    display: block;
+    right:20px;
+    top:25px;
+    font-size:15px;
+
+}
+    .right{
+        width: 100vw;
+        margin: 0;
+    }
+    .playbar{
+        width:89vw;
+        justify-content: center;
+        font-size: 12px;          
+    }
+ 
+    .hamburger{
+        display: block;
+    }
+    .cardContainer{
+        width:90vw;
+        margin: 0;
+     justify-content: center;
+    }
+    .abovebar{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+}
 @media(max-width: 1200px ){
     .left{
         position: absolute;
@@ -357,6 +402,7 @@ body {
     }
     .left .close{
     position: absolute;
+    display: block;
     right:20px;
     top:25px;
     font-size:15px;
@@ -364,10 +410,12 @@ body {
 }
     .right{
         width: 100vw;
+        margin: 0;
     }
     .playbar{
         width:89vw;
         font-size: 12px;          
+    justify-content: center;
     }
  
     .hamburger{
@@ -376,5 +424,7 @@ body {
     .cardContainer{
         width:90vw;
         margin: 0;
+     justify-content: center;
     }
+    
 }
