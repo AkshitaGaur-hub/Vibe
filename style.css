@@ -202,6 +202,8 @@ body {
 
 .button {
     margin: 2px;
+    padding: 10px;
+
 }
 
 .buttons>* {
@@ -228,23 +230,20 @@ body {
 
 .loginbtn {
     align-items: center;
-    background-color: 9828bb;
+    background: linear-gradient(60deg, #f11784, #9b4dff);;
     border-radius: 20px;
     color: white;
     font-weight: lighter;
-    width: 53px;
-    height: 24px;
-    padding: 3px;
+    width: 65px;
+    height: 30px;
+margin-left: 12px;
     border: none;
     outline: none;
     cursor: pointer;
 }
 
 .loginbtn:hover {
-    padding: 4px;
     font-weight: bold;
-    width: 54px;
-    height: 25px;
     cursor: pointer;
 }
 .volume{
@@ -332,7 +331,7 @@ body {
 
 }
 .songinfo{
- width: 170px;
+ width: 200px;
 }
 #playnow {
     font-size: x-small;
@@ -437,7 +436,8 @@ body {
     }
     .playbar{
         width:89vw;
-        justify-content: center;
+   display : flex;
+        justify-content: space-evenly;
         font-size: 12px;          
     }
  
@@ -484,7 +484,9 @@ body {
     .playbar{
         width:89vw;
         font-size: 12px;          
-    justify-content: center;
+   display : flex;
+        justify-content: space-evenly;
+
     }
  
     .hamburger{
