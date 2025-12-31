@@ -343,11 +343,12 @@ margin-left: 12px;
 }
 
 /* small play-now label + icon inside song list */
+
 .playnow {
     display: flex;
     align-items: center;
     gap: 6px;
-    /* width: 50px; */
+    /* width: 100px; */
     font-size: x-small;
     color: #d0d0d0;
 }
