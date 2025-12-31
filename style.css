@@ -374,6 +374,45 @@ margin-left: 12px;
     color: white;
     padding: 0px 6px;
 }
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.card .play-overlay {
+  position: absolute;
+  top: 55%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  background: rgba(128, 0, 128, 0.7); /* purple vibe */
+  border-radius: 50%;
+  width: 35px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.card:hover .play-overlay {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.card .play-overlay i {
+  color: #fff;
+  font-size: 20px;
+}
+
+
 
 .timevol {
     display: flex;

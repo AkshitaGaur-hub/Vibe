@@ -83,11 +83,16 @@ async function displayAlbums() {
             const info = await infoRes.json();
 
             cardContainer.innerHTML += `
-              <div class="card" data-folder="${folder}">
-                <img src="/songs/${folder}/cover.png">
-                <h2>${info.title}</h2>
-                <p>${info.description}</p>
-              </div>`;
+  <div class="card" data-folder="${folder}">
+    <div class="play-overlay">
+      <i class="fa-solid fa-play"></i>
+    </div>
+    <img src="/songs/${folder}/cover.png" alt="${info.title}">
+    <h2>${info.title}</h2>
+    <p>${info.description}</p>
+  </div>`;
+
+
         } catch (err) {
             console.error(`Album skipped: ${folder}`, err);
         }
@@ -194,6 +199,17 @@ loopBtn.addEventListener("click", () => {
         loopBtn.style.transform = "";
     }
 });
+
+Array.from(document.getElementsByClassName("card")).forEach(card => {
+        card.addEventListener("click", async item => {
+            let folderName = item.currentTarget.dataset.folder;
+            if (folderName) {
+                songs = await getSongs(`songs/${folderName}`);
+                renderPlaylist(songs);
+                if (songs.length > 0) playMusic(songs[0], true);
+            }
+        });
+    });
 
 }
 
