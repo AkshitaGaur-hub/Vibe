@@ -106,7 +106,10 @@ async function displayAlbums() {
             if (!songs || songs.length === 0) return;
 
             renderPlaylist(songs);
-            playMusic(songs[0], true);
+            playMusic(songs[0]);
+            document.getElementById("play")
+                .classList.replace("fa-circle-play", "fa-pause");
+
         });
     });
 }
@@ -184,23 +187,23 @@ async function main() {
         currentSong.volume = e.target.value / 100;
     });
 
-   const loopBtn = document.getElementById("loop");
-let isLooping = false;
+    const loopBtn = document.getElementById("loop");
+    let isLooping = false;
 
-loopBtn.addEventListener("click", () => {
-    isLooping = !isLooping;
-    currentSong.loop = isLooping;
+    loopBtn.addEventListener("click", () => {
+        isLooping = !isLooping;
+        currentSong.loop = isLooping;
 
-    if(isLooping){
-        loopBtn.style.color = "#ff66cc"; 
-        loopBtn.style.transform = "scale(1.2)";
-    } else {
-        loopBtn.style.color = "";
-        loopBtn.style.transform = "";
-    }
-});
+        if (isLooping) {
+            loopBtn.style.color = "#ff66cc";
+            loopBtn.style.transform = "scale(1.2)";
+        } else {
+            loopBtn.style.color = "";
+            loopBtn.style.transform = "";
+        }
+    });
 
-Array.from(document.getElementsByClassName("card")).forEach(card => {
+    Array.from(document.getElementsByClassName("card")).forEach(card => {
         card.addEventListener("click", async item => {
             let folderName = item.currentTarget.dataset.folder;
             if (folderName) {
@@ -210,6 +213,24 @@ Array.from(document.getElementsByClassName("card")).forEach(card => {
             }
         });
     });
+
+    currentSong.addEventListener("ended", () => {
+        const current = normalize(currentSong.src);
+        const index = songs.findIndex(s => normalize(s) === current);
+
+        // Play next song if available
+        if (index !== -1 && index < songs.length - 1) {
+            playMusic(songs[index + 1]);
+        }
+        // Optional: restart album
+        else {
+            currentSong.currentTime = 0;
+            currentSong.pause();
+            document.getElementById("play")
+                .classList.replace("fa-pause", "fa-circle-play");
+        }
+    });
+
 
 }
 
