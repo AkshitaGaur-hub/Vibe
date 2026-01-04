@@ -31,8 +31,8 @@ Plug in your headphones, press play, and let the music **flow seamlessly** ✨.
 ---
 
 ## 🎬 Sneak Peek
-
-![Vibes Home](https://vibesa7.netlify.app/)  
+Check out my [Vibes demo](https://vibesa7.netlify.app/) 🎶
+ 
 
 ---
 
