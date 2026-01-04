@@ -1,5 +1,6 @@
 console.log("Lets write javascript");
-
+let albumsList = [];
+let currentAlbumIndex = 0;
 let songs = [];
 let currFolder = "";
 let currentSong = new Audio();
@@ -73,9 +74,10 @@ async function displayAlbums() {
     cardContainer.innerHTML = "";
 
     const res = await fetch("/songs/albums.json");
-    const albums = await res.json();
+    albumsList = await res.json();
 
-    for (const folder of albums) {
+
+    for (const folder of albumsList) {
         try {
             const infoRes = await fetch(`/songs/${folder}/info.json`);
             if (!infoRes.ok) throw new Error("info.json missing");
@@ -102,6 +104,8 @@ async function displayAlbums() {
     document.querySelectorAll(".card").forEach(card => {
         card.addEventListener("click", async () => {
             const folder = card.dataset.folder;
+            currentAlbumIndex = albumsList.indexOf(folder); // ✅ always track current album
+
             songs = await getSongs(`songs/${folder}`);
             if (!songs || songs.length === 0) return;
 
@@ -109,9 +113,28 @@ async function displayAlbums() {
             playMusic(songs[0]);
             document.getElementById("play")
                 .classList.replace("fa-circle-play", "fa-pause");
-
         });
     });
+    card.addEventListener("click", async () => {
+        const folder = card.dataset.folder;
+
+        currentAlbumIndex = albumsList.indexOf(folder);
+
+        songs = await getSongs(`songs/${folder}`);
+        if (!songs || songs.length === 0) return;
+
+        renderPlaylist(songs);
+        playMusic(songs[0]);
+    });
+
+    card.addEventListener("click", async () => {
+        const folder = card.dataset.folder;
+        currentAlbumIndex = albumsList.indexOf(folder); // ✅ TRACK THIS
+        songs = await getSongs(`songs/${folder}`);
+        renderPlaylist(songs);
+        playMusic(songs[0]);
+    });
+
 }
 
 // ===================== HAMBURGER =====================
@@ -133,9 +156,15 @@ function attachHamburger() {
 async function main() {
     attachHamburger();
 
-    songs = await getSongs("songs/Aujla-Era");
+    const res = await fetch("/songs/albums.json");
+    albumsList = await res.json();
+
+    const defaultAlbum = "Aujla-Era";
+    songs = await getSongs(`songs/${defaultAlbum}`);
+    currentAlbumIndex = albumsList.indexOf(defaultAlbum);
     renderPlaylist(songs);
     playMusic(songs[0], true);
+
 
     displayAlbums();
 
@@ -195,7 +224,7 @@ async function main() {
         currentSong.loop = isLooping;
 
         if (isLooping) {
-            loopBtn.style.color = "#ff66cc";
+            loopBtn.style.color = "#e842c4ff";
             loopBtn.style.transform = "scale(1.2)";
         } else {
             loopBtn.style.color = "";
@@ -214,22 +243,35 @@ async function main() {
         });
     });
 
-    currentSong.addEventListener("ended", () => {
+  currentSong.addEventListener("ended", async () => {
         const current = normalize(currentSong.src);
         const index = songs.findIndex(s => normalize(s) === current);
 
-        // Play next song if available
+        // Next song in same album
         if (index !== -1 && index < songs.length - 1) {
             playMusic(songs[index + 1]);
         }
-        // Optional: restart album
+        // Move to next album
         else {
-            currentSong.currentTime = 0;
-            currentSong.pause();
-            document.getElementById("play")
-                .classList.replace("fa-pause", "fa-circle-play");
+            const nextAlbumIndex = currentAlbumIndex + 1;
+
+            if (nextAlbumIndex < albumsList.length) {
+                currentAlbumIndex = nextAlbumIndex;
+
+                const nextFolder = albumsList[currentAlbumIndex];
+                songs = await getSongs(`songs/${nextFolder}`);
+
+                renderPlaylist(songs);
+                playMusic(songs[0]);
+            }
+            // If no next album → stop
         }
     });
+
+    // songs = await getSongs("songs/Aujla-Era");
+    // currentAlbumIndex = albumsList.indexOf("Aujla-Era"); // ✅ TRACK THIS
+    // renderPlaylist(songs);
+    // playMusic(songs[0], true);
 
 
 }
