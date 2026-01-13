@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 64 64">
+  <defs>
+    <!-- Gradient for circle -->
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8e2de2;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#ff416c;stop-opacity:1"/>
+    </linearGradient>
+
+    <!-- Glossy highlight -->
+    <radialGradient id="gloss" cx="30%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Purple glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Gradient circle -->
+  <circle cx="32" cy="32" r="32" fill="url(#grad1)" />
+
+  <!-- Glossy effect -->
+  <circle cx="32" cy="32" r="32" fill="url(#gloss)" />
+
+  <!-- Thunderbolt with purple glow -->
+  <polygon points="32,14 25,36 32,36 28,50 40,28 33,28 38,14" fill="white" stroke="#b36aff" stroke-width="1.5" filter="url(#glow)"/>
+</svg>

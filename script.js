@@ -199,17 +199,51 @@ async function main() {
     });
 
     // Next / Previous
-    previous.addEventListener("click", () => {
+    previous.addEventListener("click", async () => {
         const current = normalize(currentSong.src);
         const index = songs.findIndex(s => normalize(s) === current);
-        if (index > 0) playMusic(songs[index - 1]);
+
+        // Previous song in same album
+        if (index > 0) {
+            playMusic(songs[index - 1]);
+        }
+        // Previous album
+        else {
+            let prevAlbumIndex = currentAlbumIndex - 1;
+            if (prevAlbumIndex < 0) prevAlbumIndex = albumsList.length - 1;
+
+            currentAlbumIndex = prevAlbumIndex;
+            const folder = albumsList[currentAlbumIndex];
+
+            songs = await getSongs(`songs/${folder}`);
+            renderPlaylist(songs);
+            playMusic(songs[songs.length - 1]); // play last song
+        }
     });
 
-    next.addEventListener("click", () => {
+
+    next.addEventListener("click", async () => {
         const current = normalize(currentSong.src);
         const index = songs.findIndex(s => normalize(s) === current);
-        if (index < songs.length - 1 && index !== -1) playMusic(songs[index + 1]);
+
+        // Next song in same album
+        if (index !== -1 && index < songs.length - 1) {
+            playMusic(songs[index + 1]);
+        }
+        // Next album
+        else {
+            let nextAlbumIndex = currentAlbumIndex + 1;
+            if (nextAlbumIndex >= albumsList.length) nextAlbumIndex = 0;
+
+            currentAlbumIndex = nextAlbumIndex;
+            const folder = albumsList[currentAlbumIndex];
+
+            songs = await getSongs(`songs/${folder}`);
+            renderPlaylist(songs);
+            playMusic(songs[0]);
+        }
     });
+
 
     // Volume
     document.querySelector(".range input").addEventListener("change", e => {
@@ -243,7 +277,7 @@ async function main() {
         });
     });
 
-  currentSong.addEventListener("ended", async () => {
+    currentSong.addEventListener("ended", async () => {
         const current = normalize(currentSong.src);
         const index = songs.findIndex(s => normalize(s) === current);
 
@@ -253,20 +287,22 @@ async function main() {
         }
         // Move to next album
         else {
-            const nextAlbumIndex = currentAlbumIndex + 1;
+            let nextAlbumIndex = currentAlbumIndex + 1;
 
-            if (nextAlbumIndex < albumsList.length) {
-                currentAlbumIndex = nextAlbumIndex;
-
-                const nextFolder = albumsList[currentAlbumIndex];
-                songs = await getSongs(`songs/${nextFolder}`);
-
-                renderPlaylist(songs);
-                playMusic(songs[0]);
+            // 🔁 IF LAST ALBUM → GO TO FIRST
+            if (nextAlbumIndex >= albumsList.length) {
+                nextAlbumIndex = 0;
             }
-            // If no next album → stop
+
+            currentAlbumIndex = nextAlbumIndex;
+            const nextFolder = albumsList[currentAlbumIndex];
+
+            songs = await getSongs(`songs/${nextFolder}`);
+            renderPlaylist(songs);
+            playMusic(songs[0]);
         }
     });
+
 
     // songs = await getSongs("songs/Aujla-Era");
     // currentAlbumIndex = albumsList.indexOf("Aujla-Era"); // ✅ TRACK THIS
