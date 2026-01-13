@@ -264,7 +264,7 @@ margin-left: 12px;
     bottom: 10px;
     background-color: #3a333d;
     min-width: 68.5vw;
-    padding: 12px;
+    padding: 5px;
      justify-content: space-evenly;
     display: flex;
     /* justify-content: space-between; */
@@ -480,7 +480,7 @@ margin-left: 12px;
     }
     .playbar{
         width:89vw;
-   display : flex;
+        display : flex;
         justify-content: space-evenly;
         font-size: 12px;          
     }
